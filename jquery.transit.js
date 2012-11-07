@@ -165,6 +165,7 @@
   // Allows you to rotate, scale and translate.
   registerCssHook('scale');
   registerCssHook('translate');
+  registerCssHook('translate3d');
   registerCssHook('rotate');
   registerCssHook('rotateX');
   registerCssHook('rotateY');
@@ -314,7 +315,25 @@
         if (y !== null) { this._translateY = unit(y, 'px'); }
 
         this.translate = this._translateX + "," + this._translateY;
+      },
+
+      // ### translate
+      // Notice how this keeps the other value.
+      //
+      //     .css({ translate: '2, 5' })    //=> "translate(2px, 5px)"
+      //
+      translate3d: function(x, y, z) {
+        if (this._translateX === undefined) { this._translateX = 0; }
+        if (this._translateY === undefined) { this._translateY = 0; }
+        if (this._translateZ === undefined) { this._translateZ = 0; }
+
+        if (x !== null) { this._translateX = unit(x, 'px'); }
+        if (y !== null) { this._translateY = unit(y, 'px'); }
+        if (z !== null) { this._translateZ = unit(z, 'px'); }
+
+        this.translate3d = this._translateX + "," + this._translateY + "," + this._translateZ;
       }
+
     },
 
     getter: {
